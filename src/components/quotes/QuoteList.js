@@ -26,7 +26,7 @@ const QuoteList = (props) => {
       search: `?sort=${isAscending ? "desc" : "asc"}`,
     });
     // history.push(`${location.pathname}?sort=${isAscending ? "desc" : "asc"}`);
-    // A better alternative is used in the lines above it for history.push
+    // A better alternative is used in the lines above it, for history.push
   }
   return (
     <Fragment>

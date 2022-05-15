@@ -1,12 +1,38 @@
 import QuoteList from "../components/quotes/QuoteList";
-
-const DUMMY_QUOTES = [
-  { id: "q1", author: "Sneh", text: "There nothing beauiful than soul" },
-  { id: "q2", author: "Swami", text: "Nothing is impossible" },
-];
+import useHttp from "../components/hooks/use-http";
+import { getAllQuotes } from "../components/lib/api";
+import { useEffect } from "react";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+import NoQuotesFound from "../components/quotes/NoQuotesFound";
 
 function AllQuotes() {
-  return <QuoteList quotes={DUMMY_QUOTES} />;
+  const {
+    sendRequest,
+    status,
+    error,
+    data: loadedQuotes,
+  } = useHttp(getAllQuotes, true);
+
+  useEffect(() => {
+    sendRequest();
+  }, [sendRequest]);
+
+  if (status === "pending") {
+    return (
+      <div className="centered">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+  if (error) {
+    return <p className="centered focused">{error}</p>;
+  }
+
+  if (status === "completed" && (!loadedQuotes || loadedQuotes.length === 0)) {
+    return <NoQuotesFound />;
+  }
+
+  return <QuoteList quotes={loadedQuotes} />;
 }
 
 export default AllQuotes;
