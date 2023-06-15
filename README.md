@@ -13,3 +13,5 @@ React Js is used in the developement.
 (HTML,CSS,JavaScript)
 React Router package is used to create the structure of multipage environment only on a singkle page application.
 No framework is used for styling. Basic styles are implemented by external css.
+
+Live Site : https://movies-https-1cdd6.web.app/
